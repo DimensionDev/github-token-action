@@ -1,9 +1,7 @@
 name: Authenticate GitHub Token
-author: septs
+author: "@DimensionDev"
 
-description:
-  Authenticate npm for consuming and publishing packages from and to the GitHub
-  Package Registry
+description: Authenticate npm for consuming and publishing packages from and to the GitHub Package Registry
 
 branding:
   icon: package
@@ -14,15 +12,13 @@ inputs:
     description: The token used for authentication. Usually, this should be your `secrets.GITHUB_TOKEN`
     default: ${{ github.token }}
     required: true
-
   registry:
     description: Automatically set the registry
     required: false
-
   working-directory:
     description: Working working-directory
     required: false
 
 runs:
   using: node12
-  main: dist/index.js
+  main: index.js
