@@ -8,18 +8,18 @@
     "lint": "eslint . --ext .js,.ts"
   },
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.2.7",
     "@nice-labs/git-rev": "^3.5.0"
   },
   "devDependencies": {
-    "@types/eslint": "^7.2.4",
-    "@types/node": "^14.14.5",
-    "@types/prettier": "^2.1.5",
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
-    "@vercel/ncc": "^0.24.1",
-    "eslint": "^7.12.1",
-    "prettier": "^2.1.2",
-    "typescript": "^4.0.5"
+    "@types/eslint": "^7.2.10",
+    "@types/node": "^15.0.0",
+    "@types/prettier": "^2.2.3",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "@vercel/ncc": "^0.28.3",
+    "eslint": "^7.25.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.4"
   }
 }
