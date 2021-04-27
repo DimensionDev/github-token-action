@@ -1,12 +1,5 @@
 import { promises as fs, PathLike } from 'fs';
 
-export function chdir(directory: string): void {
-  if (directory === '') {
-    return;
-  }
-  process.chdir(directory);
-}
-
 export async function update(
   rc: PathLike,
   callback: (lines: string[]) => Promise<void> | void,

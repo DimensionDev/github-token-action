@@ -1,5 +1,5 @@
 name: Authenticate GitHub Token
-author: "@DimensionDev"
+author: '@DimensionDev'
 
 description: Authenticate npm for consuming and publishing packages from and to the GitHub Package Registry
 
@@ -14,9 +14,6 @@ inputs:
     required: true
   registry:
     description: Automatically set the registry
-    required: false
-  working-directory:
-    description: Working working-directory
     required: false
 
 runs:
