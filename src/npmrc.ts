@@ -1,6 +1,5 @@
-import path from 'path';
-import { homedir } from 'os';
-import { update, replace } from './utils';
+import { execFile as _execFile } from 'child_process';
+import { promisify } from 'util';
 
 interface Options {
   token: string;
@@ -9,25 +8,29 @@ interface Options {
 }
 
 export async function configure(options: Options): Promise<void> {
-  const rcPath = path.join(
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    options.global ? homedir() : process.env.GITHUB_WORKSPACE!,
-    '.npmrc',
-  );
-  return update(rcPath, (lines) => {
-    const prefix = '//npm.pkg.github.com';
-    replace(lines, prefix, `${prefix}/:_authToken=${options.token}`);
-    if (options.registry) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      setRegistry(lines, process.env.GITHUB_REPOSITORY!.split('/')![0]);
-    }
-  });
+  await setToken(options.token, options.global);
+  if (options.registry) {
+    await setRepistry(options.global);
+  }
 }
 
-const setRegistry = (lines: string[], name?: string) => {
-  if (name === undefined) {
-    return;
+async function setToken(token: string, global: boolean) {
+  await push('//npm.pkg.github.com/:_authToken', token, global);
+}
+
+async function setRepistry(global: boolean) {
+  const repository = process.env.GITHUB_REPOSITORY ?? '';
+  const index = repository.indexOf('/');
+  const name = repository.slice(0, index);
+  const registry = `@${name.toLowerCase()}:registry`;
+  await push(registry, `https://npm.pkg.github.com/${name}`, global);
+}
+
+function push(key: string, value: string, global: boolean) {
+  const execFile = promisify(_execFile);
+  const argv = ['config', 'set', `${key}=${value}`];
+  if (global) {
+    argv.push('--global');
   }
-  const prefix = `@${name.toLowerCase()}:registry`;
-  replace(lines, prefix, `${prefix}=https://npm.pkg.github.com/${name}`);
-};
+  return execFile('npm', argv);
+}
