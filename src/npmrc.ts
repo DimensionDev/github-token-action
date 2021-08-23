@@ -1,4 +1,4 @@
-import { execFile as _execFile } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 
 interface Options {
@@ -8,29 +8,24 @@ interface Options {
 }
 
 export async function configure(options: Options): Promise<void> {
-  await setToken(options.token, options.global);
+  await setToken(options.token);
   if (options.registry) {
-    await setRepistry(options.global);
+    await setRepistry();
   }
 }
 
-async function setToken(token: string, global: boolean) {
-  await push('//npm.pkg.github.com/:_authToken', token, global);
+async function setToken(token: string) {
+  await push('//npm.pkg.github.com/:_authToken', token);
 }
 
-async function setRepistry(global: boolean) {
+async function setRepistry() {
   const repository = process.env.GITHUB_REPOSITORY ?? '';
   const index = repository.indexOf('/');
   const name = repository.slice(0, index);
   const registry = `@${name.toLowerCase()}:registry`;
-  await push(registry, `https://npm.pkg.github.com/${name}`, global);
+  await push(registry, `https://npm.pkg.github.com/${name}`);
 }
 
-function push(key: string, value: string, global: boolean) {
-  const execFile = promisify(_execFile);
-  const argv = ['config', 'set', `${key}=${value}`];
-  if (global) {
-    argv.push('--global');
-  }
-  return execFile('npm', argv);
+function push(key: string, value: string) {
+  return promisify(execFile)('npm', ['config', 'set', key, value]);
 }

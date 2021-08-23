@@ -15,9 +15,6 @@ inputs:
   registry:
     description: Automatically set the registry
     required: false
-  global:
-    description: Global
-    required: false
 
 runs:
   using: node12
