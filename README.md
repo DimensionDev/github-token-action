@@ -12,8 +12,8 @@ and to the GitHub Package Registry.
 
 ```yaml
 steps:
-  - uses: actions/checkout@v2
-  - uses: actions/setup-node@v2
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
   - uses: dimensiondev/github-token-action@latest
   - run: npm install
   - run: npm publish

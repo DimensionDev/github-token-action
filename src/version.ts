@@ -1,7 +1,7 @@
 import git from '@nice-labs/git-rev';
 
 export function samver(): string {
-  const date = git.commitDate();
+  const date = (git.default || git).commitDate();
   const timestamp = [
     date.getUTCFullYear(),
     date.getUTCMonth() + 1,
@@ -13,5 +13,5 @@ export function samver(): string {
   const displayTime = timestamp
     .map((_) => _.toString().padStart(2, '0'))
     .join('');
-  return [displayTime, git.commitHash(true)].join('-');
+  return [displayTime, (git.default || git).commitHash(true)].join('-');
 }

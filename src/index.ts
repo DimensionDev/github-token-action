@@ -1,6 +1,6 @@
 import { exportVariable, getInput, setFailed } from '@actions/core';
-import * as npmrc from './npmrc';
-import { samver } from './version';
+import * as npmrc from './npmrc.js';
+import { samver } from './version.js';
 
 async function main(): Promise<void> {
   const token = getInput('token');

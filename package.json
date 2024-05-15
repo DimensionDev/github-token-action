@@ -1,25 +1,20 @@
 {
   "name": "@dimensiondev/github-token-action",
   "private": true,
+  "type": "module",
   "repository": "https://github.com/DimensionDev/github-token-action",
   "license": "MIT",
   "scripts": {
-    "build": "ncc build -m ./src/index.ts",
-    "lint": "eslint . --ext .js,.ts"
+    "build": "ncc build -m ./src/index.ts"
   },
   "dependencies": {
-    "@actions/core": "^1.2.7",
-    "@nice-labs/git-rev": "^3.5.0"
+    "@actions/core": "^1.10.1",
+    "@nice-labs/git-rev": "^3.5.1"
   },
   "devDependencies": {
-    "@types/eslint": "^7.2.10",
-    "@types/node": "^16.3.1",
-    "@types/prettier": "^2.2.3",
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "@vercel/ncc": "^0.28.3",
-    "eslint": "^7.25.0",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.4"
+    "@types/node": "^20.12.12",
+    "@vercel/ncc": "^0.38.1",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
   }
 }
